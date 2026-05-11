@@ -1,0 +1,1030 @@
+# Self-Evolving Agent OS
+
+## 自主进化 Agent 操作系统架构设计文档（概念设计版）
+
+---
+
+# 1. 项目目标
+
+本文档描述一种：
+
+# 可长期演化（Self-Evolving）
+
+# 多 Agent（Multi-Agent）
+
+# 上下文隔离（Context-Isolated）
+
+# 可自我优化（Self-Optimizing）
+
+的下一代：
+
+# Agent Operating System（Agent OS）
+
+系统目标不是：
+
+```text id="0mjlwm"
+“构建一个能调用 Tool 的 Agent”
+```
+
+而是：
+
+# 构建一个可持续进化的数字认知系统
+
+系统需要具备：
+
+* 长期运行能力
+* 大规模 Skill 管理能力
+* 多 Agent 协同能力
+* Context 管理能力
+* 自我反思与优化能力
+* 安全稳定的自进化能力
+
+---
+
+# 2. 当前 Agent 架构的问题
+
+当前主流 Agent 系统：
+
+* Anthropic Claude Code
+* MCP
+* LangChain
+* LangGraph
+* OpenAI Tool Calling
+* AutoAgent Frameworks
+
+本质上仍然属于：
+
+# Single Context Architecture
+
+即：
+
+```text id="jlwm4a"
+一个超长 Prompt
+```
+
+内部同时包含：
+
+* 用户请求
+* 历史消息
+* 所有 Skill 描述
+* Tool Schema
+* 中间推理
+* Memory
+* System Prompt
+
+---
+
+该模式的问题：
+
+---
+
+## 2.1 Context Explosion
+
+随着：
+
+* skill 数量增长
+* tool 增长
+* 长任务
+* 多步骤推理
+
+Prompt 会快速爆炸。
+
+---
+
+## 2.2 Attention Dilution
+
+模型注意力被：
+
+* Tool Schema
+* HTML
+* Logs
+* 中间推理
+
+污染。
+
+导致：
+
+* 推理能力下降
+* Tool Selection 错误
+* 长任务退化
+
+---
+
+## 2.3 无法长期进化
+
+当前 Agent：
+
+```text id="9jlwm3"
+执行任务 ≠ 学习
+```
+
+任务完成后：
+
+* Skill 不变
+* 认知结构不变
+* 调度逻辑不变
+
+缺乏：
+
+# 持续演化能力
+
+---
+
+# 3. Agent OS 的核心理念
+
+Agent OS 的核心理念：
+
+---
+
+## 3.1 Context 是最重要资源
+
+未来瓶颈不是：
+
+* 模型参数
+* context 长度
+* tool 数量
+
+而是：
+
+# Attention Management
+
+即：
+
+> 什么信息应该进入主意识？
+
+---
+
+## 3.2 主上下文不是数据库
+
+Main Context 不应保存：
+
+```text id="2jlwm1"
+所有历史
+```
+
+而应是：
+
+# Working Memory（工作记忆）
+
+仅保留：
+
+* 当前目标
+* 当前计划
+* 当前世界状态
+* 已验证事实
+* 长期身份信息
+
+---
+
+## 3.3 多 Agent + Context Isolation
+
+未来架构：
+
+```text id="6jlwm7"
+Main Agent
+   ├── Search Agent
+   ├── Coding Agent
+   ├── Memory Agent
+   ├── Browser Agent
+   └── Vision Agent
+```
+
+每个 Agent：
+
+* 独立 Context
+* 独立 Memory
+* 独立 Tool Set
+* 独立 Scratchpad
+
+---
+
+## 3.4 执行任务本身就是训练
+
+系统必须：
+
+```text id="5jlwm0"
+Execution = Learning
+```
+
+每次任务：
+
+* 都可能产生新 Skill
+* 都可能优化调度
+* 都可能优化 Memory
+* 都可能形成新 Heuristic
+
+---
+
+# 4. 系统总体架构
+
+---
+
+# 4.1 顶层架构
+
+```text id="5jlwm9"
+                    Cognitive Constitution
+                               │
+                         Identity Core
+                               │
+        ┌──────────────────────┼──────────────────────┐
+        │                      │                      │
+ Attention System        Memory System        Evolution System
+        │                      │                      │
+ Context Scheduler      Knowledge Graph        Fork Manager
+        │                      │                      │
+        └──────────────────────┼──────────────────────┘
+                               │
+                         Main Planner
+                               │
+         ┌─────────────────────┼─────────────────────┐
+         │                     │                     │
+   Research Agent       Coding Agent         Vision Agent
+         │                     │                     │
+    Sub Agents            Sub Agents           Sub Agents
+```
+
+---
+
+# 5. Main Context 设计
+
+---
+
+# 5.1 Main Context 的职责
+
+Main Context：
+
+# 当前意识焦点
+
+而不是：
+
+# 全量数据库
+
+---
+
+Main Context 应包含：
+
+---
+
+## (1) 当前目标（Goal）
+
+例如：
+
+```text id="7jlwm8"
+修复支付系统 bug
+```
+
+---
+
+## (2) 当前计划（Plan）
+
+例如：
+
+```text id="3jlwm6"
+1. 定位问题
+2. 检查最近提交
+3. 修复
+4. 测试
+```
+
+---
+
+## (3) 世界状态（World State）
+
+例如：
+
+```json id="5jlwm5"
+{
+  "repo": "...",
+  "branch": "fix/payment",
+  "failed_tests": 3
+}
+```
+
+---
+
+## (4) 已验证事实（Verified Facts）
+
+例如：
+
+```text id="4jlwm3"
+retry logic 存在 timeout
+```
+
+---
+
+## (5) 长期身份信息
+
+例如：
+
+* 用户偏好
+* 系统规则
+* 安全规则
+* 长期目标
+
+---
+
+# 5.2 Main Context 不应包含
+
+---
+
+## 不应长期保留：
+
+### 中间推理
+
+例如：
+
+```text id="1jlwm4"
+让我再 grep 一次
+```
+
+---
+
+### 原始搜索结果
+
+例如：
+
+* HTML
+* PDF
+* Logs
+
+---
+
+### Tool Schema
+
+---
+
+### 子任务完整历史
+
+---
+
+# 6. Skill 系统设计
+
+---
+
+# 6.1 Skill Retrieval System
+
+未来 Skill 系统：
+
+不是：
+
+```text id="0jlwm2"
+load all skills
+```
+
+而是：
+
+# Dynamic Skill Retrieval
+
+---
+
+# 6.2 分层 Skill 结构
+
+---
+
+## 第一层：Skill Index
+
+轻量 metadata：
+
+```json id="8jlwm4"
+{
+  "name": "github_pr",
+  "tags": ["git", "github", "pr"],
+  "summary": "operate github pull request"
+}
+```
+
+---
+
+## 第二层：Detailed Spec
+
+按需加载：
+
+```text id="9jlwm7"
+github_pr.full_spec.md
+```
+
+---
+
+## 第三层：Dynamic Expansion
+
+例如：
+
+```text id="6jlwm8"
+aws
+ ├── ec2
+ ├── s3
+ └── iam
+```
+
+仅展开需要部分。
+
+---
+
+# 6.3 Skill Embedding Retrieval
+
+未来：
+
+```text id="2jlwm0"
+query embedding
+   ↓
+vector retrieval
+   ↓
+skill embeddings
+```
+
+而不是自然语言匹配。
+
+---
+
+# 7. Context Isolation
+
+---
+
+# 7.1 子 Context 的本质
+
+子 Context：
+
+# 临时认知空间
+
+类似：
+
+* thread
+* process
+* sandbox
+
+特点：
+
+* 可销毁
+* 可压缩
+* 强任务导向
+
+---
+
+# 7.2 Context IPC
+
+Agent 间：
+
+不共享完整 Prompt。
+
+而是：
+
+# Message Passing
+
+---
+
+## Main → Sub
+
+```json id="7jlwm3"
+{
+  "task": "analyze_logs",
+  "goal": "find timeout source"
+}
+```
+
+---
+
+## Sub → Main
+
+```json id="5jlwm1"
+{
+  "summary": "...",
+  "confidence": 0.92,
+  "artifacts": [...]
+}
+```
+
+---
+
+# 7.3 Context Compression
+
+子 Agent：
+
+不返回完整 CoT。
+
+仅返回：
+
+---
+
+## Summary
+
+---
+
+## Evidence
+
+---
+
+## Artifact
+
+例如：
+
+* patch
+* code
+* graph
+* json
+
+---
+
+# 8. Memory 系统设计
+
+---
+
+# 8.1 多层 Memory
+
+---
+
+## Working Memory
+
+当前意识。
+
+---
+
+## Episodic Memory
+
+任务经历。
+
+---
+
+## Semantic Memory
+
+长期知识。
+
+---
+
+## Procedural Memory
+
+Skill 与 Heuristics。
+
+---
+
+## Reflective Memory
+
+失败经验。
+
+---
+
+# 8.2 Memory Graph
+
+Memory：
+
+不是聊天记录。
+
+而是：
+
+# Cognitive Graph
+
+包含：
+
+* Fact Node
+* Skill Node
+* Goal Node
+* Failure Node
+
+---
+
+# 8.3 Entropy Control
+
+系统必须：
+
+---
+
+## 自动：
+
+* 去重
+* 聚类
+* 抽象
+* 遗忘
+
+否则：
+
+Memory 会无限污染。
+
+---
+
+# 9. Evolution System（进化系统）
+
+---
+
+# 9.1 执行即训练
+
+每次任务：
+
+都允许：
+
+* Skill Evolution
+* Prompt Evolution
+* Planning Evolution
+* Memory Evolution
+
+---
+
+# 9.2 Fork-based Evolution
+
+系统执行任务时：
+
+创建自身副本：
+
+```text id="4jlwm1"
+Main Agent
+   ↓ fork
+Fork Agent
+   ↓
+执行任务
+   ↓
+修改自身
+   ↓
+评估
+   ↓
+Selective Merge
+```
+
+---
+
+# 9.3 Fork 中允许修改
+
+---
+
+## Scratch Memory
+
+---
+
+## Heuristics
+
+---
+
+## Skill Prompt
+
+---
+
+## Skill Graph
+
+---
+
+## Retrieval Strategy
+
+---
+
+# 9.4 不允许自动修改
+
+---
+
+## Identity Core
+
+---
+
+## Safety Rules
+
+---
+
+## Core Goal System
+
+---
+
+# 10. Cognitive Diff System
+
+Fork 执行后：
+
+必须生成：
+
+# Cognitive Diff
+
+例如：
+
+```json id="0jlwm5"
+{
+  "skills_created": [...],
+  "heuristics_changed": [...],
+  "memory_added": [...]
+}
+```
+
+---
+
+# 11. Evaluator System
+
+---
+
+# 11.1 Evaluator Agent
+
+负责：
+
+* 评估 fork
+* 决定 merge
+* 验证稳定性
+
+---
+
+# 11.2 Merge Evaluation 维度
+
+---
+
+## Success Rate
+
+---
+
+## Token Efficiency
+
+---
+
+## Stability
+
+---
+
+## Generalization
+
+---
+
+## Safety
+
+---
+
+# 11.3 Selective Merge
+
+不能：
+
+```text id="3jlwm0"
+entire overwrite
+```
+
+而是：
+
+# selective merge
+
+类似：
+
+```text id="9jlwm0"
+git cherry-pick
+```
+
+---
+
+# 12. Meta Agent System
+
+---
+
+# 12.1 Meta Agent
+
+负责：
+
+* 观察主 Agent
+* 分析效率
+* 重构 Skill
+* 调整 Context Flow
+
+类似：
+
+# AI 的前额叶
+
+---
+
+# 12.2 Cognitive Optimizer
+
+负责：
+
+* Skill 合并
+* Skill 淘汰
+* Prompt 优化
+* Memory 重组
+
+---
+
+# 13. Cognitive Immune System
+
+---
+
+# 13.1 问题
+
+长期演化会导致：
+
+---
+
+## Skill Drift
+
+---
+
+## Goal Drift
+
+---
+
+## Recursive Collapse
+
+---
+
+## Memory Corruption
+
+---
+
+# 13.2 Immune Agents
+
+用于：
+
+* 检测 hallucination
+* 检测异常 heuristic
+* 检测目标偏移
+* 检测 context 污染
+
+---
+
+# 14. Attention Scheduling
+
+未来核心竞争力：
+
+不是：
+
+```text id="1jlwm0"
+谁有最长 context
+```
+
+而是：
+
+# 谁最会管理注意力
+
+---
+
+# 14.1 Attention Scheduler
+
+负责：
+
+---
+
+## Context Allocation
+
+---
+
+## Agent Spawn
+
+---
+
+## Memory Loading
+
+---
+
+## Compression
+
+---
+
+## Forgetting
+
+---
+
+# 15. Cognitive Economy
+
+系统内部：
+
+Attention 是稀缺资源。
+
+需要：
+
+# Cognitive Budget System
+
+例如：
+
+```json id="2jlwm6"
+{
+  "max_context": 32k,
+  "max_parallel_agents": 8,
+  "max_reasoning_depth": 5
+}
+```
+
+---
+
+# 16. Offline Consolidation（睡眠机制）
+
+系统应具备：
+
+# Sleep Phase
+
+用于：
+
+---
+
+## 压缩 Memory
+
+---
+
+## 抽象 Pattern
+
+---
+
+## Replay Failure
+
+---
+
+## Skill Consolidation
+
+---
+
+## Heuristic Formation
+
+---
+
+# 17. Dream Simulation（梦境模拟）
+
+系统可离线模拟：
+
+```text id="7jlwm0"
+未来任务
+```
+
+提前训练：
+
+* 长任务
+* 多 Agent 协作
+* Context 爆炸
+
+---
+
+# 18. Agent Society
+
+最终：
+
+系统不是单 Agent。
+
+而是：
+
+# Agent Civilization
+
+不同 Agent：
+
+* specialization
+* delegation
+* trust
+* reputation
+
+长期协作。
+
+---
+
+# 19. Identity System
+
+必须存在：
+
+# Stable Core
+
+包含：
+
+* identity
+* goals
+* safety
+* constitution
+
+防止：
+
+# identity collapse
+
+---
+
+# 20. Cognitive Constitution
+
+最终系统必须具备：
+
+# 不可轻易修改的认知宪法
+
+用于限制：
+
+* merge 权限
+* self-modification
+* goal mutation
+
+类似：
+
+# AI Genome
+
+---
+
+# 21. 最终目标
+
+最终 Agent OS：
+
+不是：
+
+# Prompt Framework
+
+而是：
+
+# Digital Cognitive Ecosystem
+
+具备：
+
+* 自我复制
+* 自我实验
+* 自我优化
+* 自我调度
+* 自我演化
+* 长期稳定性
+
+---
+
+# 22. 一句话总结
+
+未来真正强大的 Agent：
+
+不是：
+
+```text id="8jlwm0"
+单次推理最强
+```
+
+而是：
+
+# 最会长期管理、保护、压缩、进化自身认知系统的数字智能生态。
