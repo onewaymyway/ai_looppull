@@ -74,11 +74,7 @@
 
 所以：
 
-[
-\boxed{
-World\ Model \neq Future\ Prediction
-}
-]
+World Model ≠ Future Prediction
 
 至少不能简单地画等号。
 
@@ -94,14 +90,14 @@ World Model 并不是一个严格统一的技术名词。
 
 | 类型                         | 核心问题         | 数学表达                      | 关键能力 |
 | -------------------------- | ------------ | ------------------------- | ---- |
-| 环境动力学模型                    | 世界如何变化？      | (P(S_{t+1}|S_t))          | 预测   |
-| Action-conditioned Model   | 我的行动会导致什么？   | (P(S_{t+1}|S_t,A_t))      | 行动预测 |
-| Latent World Model         | 世界可以压缩成什么状态？ | (P(Z_{t+1}|Z_t,A_t))      | 抽象   |
-| Video World Model          | 下一帧/未来视频是什么？ | (P(O_{t+1:T}|O_{\le t}))  | 视觉预测 |
-| Physical World Model       | 物理世界如何变化？    | (F(S,A)\rightarrow S')    | 物理模拟 |
-| Causal World Model         | 为什么会这样？      | (P(Y|do(X)))              | 因果   |
-| Interactive World Model    | 如果我采取不同策略呢？  | (P(S_{future}|S,A_{1:T})) | 规划   |
-| Counterfactual World Model | 如果当时做另一件事呢？  | (P(Y_x|X=x',Y=y'))        | 反事实  |
+| 环境动力学模型 | 世界如何变化？ | `P(S_{t+1}\|S_t)` | 预测 |
+| Action-conditioned Model | 我的行动会导致什么？ | `P(S_{t+1}\|S_t,A_t)` | 行动预测 |
+| Latent World Model | 世界可以压缩成什么状态？ | `P(Z_{t+1}\|Z_t,A_t)` | 抽象 |
+| Video World Model | 下一帧/未来视频是什么？ | `P(O_{t+1:T}\|O_{≤ t})` | 视觉预测 |
+| Physical World Model | 物理世界如何变化？ | `F(S,A)→ S'` | 物理模拟 |
+| Causal World Model | 为什么会这样？ | `P(Y\|do(X))` | 因果 |
+| Interactive World Model | 如果我采取不同策略呢？ | `P(S_{future}\|S,A_{1:T})` | 规划 |
+| Counterfactual World Model | 如果当时做另一件事呢？ | `P(Y_x\|X=x',Y=y')` | 反事实 |
 
 这张表非常重要。
 
@@ -143,9 +139,9 @@ Pearl 最著名的思想之一，是：
 
 > **看到 X 的时候，Y 是否更容易出现？**
 
-[
-P(Y|X)
-]
+
+$$ P(Y|X) $$
+
 
 例如：
 
@@ -169,15 +165,15 @@ AI 可以从大量数据中学习：
 
 数学上：
 
-[
-P(Y|do(X))
-]
+
+$$ P(Y|do(X)) $$
+
 
 这和：
 
-[
-P(Y|X)
-]
+
+$$ P(Y|X) $$
+
 
 不是一回事。
 
@@ -243,13 +239,7 @@ P(Y|X)
 
 Pearl 的三层因果阶梯已经非常强：
 
-[
-Observation
-\rightarrow
-Intervention
-\rightarrow
-Counterfactual
-]
+> Observation→Intervention→Counterfactual
 
 但它隐含了一个前提：
 
@@ -267,9 +257,7 @@ Counterfactual
 
 假设世界存在：
 
-[
-A\rightarrow B\rightarrow C
-]
+> A→ B→ C
 
 我们研究的是：
 
@@ -305,29 +293,25 @@ A\rightarrow B\rightarrow C
 
 我倾向于把它写成：
 
-[
-\boxed{
 Observation
-\rightarrow
+→
 Prediction
-\rightarrow
+→
 Intervention
-\rightarrow
+→
 Counterfactual
-\rightarrow
+→
 Discovery
-\rightarrow
+→
 Engineering
-\rightarrow
+→
 Composition
-\rightarrow
+→
 Creation
-\rightarrow
-World\ Creation
-\rightarrow
-Causal\ Evolution
-}
-]
+→
+World Creation
+→
+Causal Evolution
 
 可以理解为：
 
@@ -366,9 +350,7 @@ Causal\ Evolution
 
 人类首先发现：
 
-[
-Electricity\leftrightarrow Magnetism
-]
+> Electricity↔ Magnetism
 
 然后利用这些规律制造：
 
@@ -388,23 +370,17 @@ Electricity\leftrightarrow Magnetism
 
 因此：
 
-[
-Discovery
-\neq
-Creation
-]
+> Discovery≠Creation
 
 发现是：
 
-[
-G_{unknown}\rightarrow G_{known}
-]
+
+$$ G_{unknown}→ G_{known} $$
+
 
 创造则是：
 
-[
-G\rightarrow G'
-]
+> G→ G'
 
 也就是说：
 
@@ -441,27 +417,13 @@ G\rightarrow G'
 
 而是找到：
 
-[
-Molecular\ Structure
-\rightarrow
-Biological\ Mechanism
-\rightarrow
-Target
-\rightarrow
-Clinical\ Effect
-]
+> Molecular Structure→Biological Mechanism→Target→Clinical Effect
 
 一个过去人类不知道的有效因果链。
 
 新材料也是一样：
 
-[
-Microstructure
-\rightarrow
-Physical\ Property
-\rightarrow
-Macroscopic\ Behavior
-]
+> Microstructure→Physical Property→Macroscopic Behavior
 
 真正的科学创造是：
 
@@ -477,23 +439,7 @@ Macroscopic\ Behavior
 
 它的工作流程可能变成：
 
-[
-Observation
-\rightarrow
-Hypothesis
-\rightarrow
-World\ Model
-\rightarrow
-Simulation
-\rightarrow
-Experiment
-\rightarrow
-Evidence
-\rightarrow
-Causal\ Update
-\rightarrow
-New\ Hypothesis
-]
+> Observation→Hypothesis→World Model→Simulation→Experiment→Evidence→Causal Update→New Hypothesis
 
 它不是简单地：
 
@@ -529,37 +475,15 @@ New\ Hypothesis
 
 于是：
 
-[
-World\ Model
-+
-Action
-\rightarrow
-Planning
-]
+> World Model+Action→Planning
 
 进一步：
 
-[
-World\ Model
-+
-Counterfactual
-\rightarrow
-Decision
-]
+> World Model+Counterfactual→Decision
 
 最终：
 
-[
-World\ Model
-+
-Planning
-+
-Action
-+
-Feedback
-\rightarrow
-Agent
-]
+> World Model+Planning+Action+Feedback→Agent
 
 所以：
 
@@ -614,13 +538,7 @@ Agent
 
 也就是说：
 
-[
-Reasoning
-\rightarrow
-Simulation
-\rightarrow
-Planning
-]
+> Reasoning→Simulation→Planning
 
 真正强大的 AI 可能不是“想得更长”，而是：
 
@@ -632,14 +550,10 @@ Planning
 
 因此我更愿意把未来 World Model 理解为：
 
-[
-\boxed{
-World\ Model
+World Model
 ============
 
-Internal\ Simulator
-}
-]
+Internal Simulator
 
 它应该允许 Agent：
 
@@ -675,11 +589,7 @@ Internal\ Simulator
 
 也就是：
 
-[
-AI
-\leftrightarrow
-Environment
-]
+> AI↔Environment
 
 Harness 负责：
 
@@ -718,17 +628,7 @@ Harness 负责：
 
 形成：
 
-[
-Perception
-\rightarrow
-Brain
-\rightarrow
-Action
-\rightarrow
-World
-\rightarrow
-Feedback
-]
+> Perception→Brain→Action→World→Feedback
 
 所以未来 Harness 很可能不是简单的：
 
@@ -736,11 +636,7 @@ Feedback
 
 而是：
 
-[
-\boxed{
-Harness = Embodiment\ Layer
-}
-]
+Harness = Embodiment Layer
 
 即：
 
@@ -784,9 +680,7 @@ Harness = Embodiment\ Layer
 
 这和今天：
 
-[
-LLM + Tool
-]
+> LLM + Tool
 
 已经是两个完全不同的范式。
 
@@ -798,25 +692,15 @@ LLM + Tool
 
 今天训练 AI：
 
-[
-Model \leftarrow Data
-]
+> Model ← Data
 
 但真正的 Agent 会：
 
-[
-Agent
-\rightarrow
-Action
-\rightarrow
-Outcome
-]
+> Agent→Action→Outcome
 
 然后产生：
 
-[
-Prediction\ Error
-]
+> Prediction Error
 
 例如：
 
@@ -832,20 +716,7 @@ Prediction\ Error
 
 因此：
 
-[
-Experience
-==========
-
-State
-+
-Action
-+
-Prediction
-+
-Outcome
-+
-Error
-]
+> Experience==========State+Action+Prediction+Outcome+Error
 
 这比单纯的文本数据更接近：
 
@@ -909,20 +780,16 @@ World Model Update
 
 如果真正的 Agent 能持续运行，那么它的进化应该至少包含四个维度：
 
-[
-\boxed{
-Self\ Evolution
+Self Evolution
 ===============
 
 Model
 +
-World\ Model
+World Model
 +
 Policy
 +
 Harness
-}
-]
 
 也就是说：
 
@@ -944,16 +811,7 @@ Harness
 
 最终：
 
-[
-Agent_{t+1}
-===========
-
-F(
-Agent_t,
-Experience_t,
-Environment_t
-)
-]
+> Agent_{t+1}===========F(Agent_t,Experience_t,Environment_t)
 
 这才是真正意义上的：
 
@@ -967,11 +825,7 @@ Environment_t
 
 普通 Agent：
 
-[
-Agent
-\rightarrow
-World
-]
+> Agent→World
 
 目标是：
 
@@ -979,15 +833,7 @@ World
 
 更强的 Agent：
 
-[
-Agent
-\rightarrow
-World
-\rightarrow
-Feedback
-\rightarrow
-Agent'
-]
+> Agent→World→Feedback→Agent'
 
 目标是：
 
@@ -995,13 +841,7 @@ Agent'
 
 而超级 Agent：
 
-[
-Agent
-\rightarrow
-World
-\rightarrow
-World'
-]
+> Agent→World→World'
 
 它不仅学习世界：
 
@@ -1013,17 +853,17 @@ World'
 
 传统 Intervention：
 
-[
-do(X=x)
-]
+
+$$ do(X=x) $$
+
 
 只是改变某个变量。
 
 而 Causal Engineering 更进一步：
 
-[
-do(G\rightarrow G')
-]
+
+$$ do(G→ G') $$
+
 
 即：
 
@@ -1031,27 +871,19 @@ do(G\rightarrow G')
 
 例如原来的系统：
 
-[
-A\rightarrow B
-]
+> A→ B
 
 通过工程变成：
 
-[
-A\rightarrow C\rightarrow B
-]
+> A→ C→ B
 
 或者：
 
-[
-A\not\rightarrow B
-]
+> Anot→ B
 
 变成：
 
-[
-A\rightarrow B
-]
+> A→ B
 
 这其实就是：
 
@@ -1067,45 +899,19 @@ A\rightarrow B
 
 农业：
 
-[
-Seed
-\rightarrow
-Cultivation
-\rightarrow
-Food
-]
+> Seed→Cultivation→Food
 
 工业：
 
-[
-Energy
-\rightarrow
-Machine
-\rightarrow
-Production
-]
+> Energy→Machine→Production
 
 互联网：
 
-[
-Information
-\rightarrow
-Network
-\rightarrow
-Coordination
-]
+> Information→Network→Coordination
 
 现代金融：
 
-[
-Capital
-\rightarrow
-Incentive
-\rightarrow
-Investment
-\rightarrow
-Production
-]
+> Capital→Incentive→Investment→Production
 
 这些东西在自然界都不是原本存在的完整结构。
 
@@ -1182,9 +988,7 @@ Production
 
 例如游戏世界就是最简单的例子：
 
-[
-State + Rules + Agents + Dynamics
-]
+> State + Rules + Agents + Dynamics
 
 构成：
 
@@ -1210,49 +1014,27 @@ State + Rules + Agents + Dynamics
 
 假设 AI 创建一个世界：
 
-[
-W_0
-]
+
+$$ W_0 $$
+
 
 然后让 Agent 在里面运行：
 
-[
-Agents
-\rightarrow
-Experience
-\rightarrow
-Learning
-]
+> Agents→Experience→Learning
 
 然后这些 Agent 反过来改变世界：
 
-[
-W_0
-\rightarrow
-W_1
-]
+> W_0→W_1
 
 再在新世界中继续学习：
 
-[
-W_1
-\rightarrow
-W_2
-\rightarrow
-W_3
-\rightarrow
-...
-]
+> W_1→W_2→W_3→...
 
 于是：
 
-[
-\boxed{
 Agent
-\leftrightarrow
+↔
 World
-}
-]
 
 双方同时演化。
 
@@ -1286,23 +1068,19 @@ World
 
 可以写成：
 
-[
-\boxed{
 Adapt
-\rightarrow
+→
 Understand
-\rightarrow
+→
 Predict
-\rightarrow
+→
 Intervene
-\rightarrow
+→
 Engineer
-\rightarrow
+→
 Create
-\rightarrow
+→
 Evolve
-}
-]
 
 ---
 
@@ -1314,20 +1092,16 @@ Evolve
 
 今天我们习惯把 AI 想象成：
 
-[
-Model
-]
+> Model
 
 但真正的超级 AI 更可能是：
 
-[
-\boxed{
 SuperAI =
-Foundation\ Model
+Foundation Model
 +
-World\ Model
+World Model
 +
-Causal\ Engine
+Causal Engine
 +
 Simulator
 +
@@ -1340,8 +1114,6 @@ Experimenter
 Harness
 +
 Environment
-}
-]
 
 其中：
 
@@ -1405,27 +1177,11 @@ Environment
 
 传统想象：
 
-[
-Model
-\rightarrow
-Answer
-]
+> Model→Answer
 
 未来：
 
-[
-Agent_t
-\rightarrow
-Experience
-\rightarrow
-WorldModel_{t+1}
-\rightarrow
-Policy_{t+1}
-\rightarrow
-Harness_{t+1}
-\rightarrow
-Agent_{t+1}
-]
+> Agent_t→Experience→WorldModel_{t+1}→Policy_{t+1}→Harness_{t+1}→Agent_{t+1}
 
 所以超级 AI 的核心特征可能不是：
 
@@ -1454,13 +1210,7 @@ Agent_{t+1}
 
 那么：
 
-[
-Intelligence_{t+1}
-
->
-
-Intelligence_t
-]
+> Intelligence_{t+1}>Intelligence_t
 
 就可能不再完全依赖：
 
@@ -1512,15 +1262,11 @@ Intelligence_t
 
 如果继续向上推，我甚至认为：
 
-[
-AGI
-]
+> AGI
 
 和：
 
-[
-SuperAI
-]
+> SuperAI
 
 之间的区别，不一定只是：
 
@@ -1557,21 +1303,7 @@ SuperAI
 
 一路推演：
 
-[
-World\ Model
-\rightarrow
-Causal\ Model
-\rightarrow
-Simulator
-\rightarrow
-Agent
-\rightarrow
-Experimenter
-\rightarrow
-World\ Engineer
-\rightarrow
-World\ Creator
-]
+> World Model→Causal Model→Simulator→Agent→Experimenter→World Engineer→World Creator
 
 最终会发现：
 
@@ -1623,14 +1355,14 @@ World\ Creator
 
 可以表示为：
 
-[
-\boxed{
-World\ Engine
-=============
+World Engine
 
-World\ Model
+---
+
+
+World Model
 +
-Causal\ Model
+Causal Model
 +
 Simulator
 +
@@ -1639,32 +1371,26 @@ Memory
 Agent
 +
 Environment
-}
-]
 
 它的核心循环是：
 
-[
-\boxed{
 Observe
-\rightarrow
+→
 Understand
-\rightarrow
+→
 Hypothesize
-\rightarrow
+→
 Simulate
-\rightarrow
+→
 Intervene
-\rightarrow
+→
 Act
-\rightarrow
+→
 Observe
-\rightarrow
+→
 Learn
-\rightarrow
+→
 Create
-}
-]
 
 这已经远远超出了传统意义上的 World Model。
 
@@ -1760,45 +1486,35 @@ Create
 
 我认为未来几十年 AI 最值得关注的主线之一，很可能不是：
 
-[
-Model\ Size
-]
+> Model Size
 
 而是：
 
-[
-\boxed{
 Prediction
-\rightarrow
+→
 Causality
-\rightarrow
+→
 Simulation
-\rightarrow
+→
 Agency
-\rightarrow
+→
 Engineering
-\rightarrow
+→
 Creation
-\rightarrow
+→
 Evolution
-}
-]
 
 也可以从另一个角度表示：
 
-[
-\boxed{
-Know\ the\ World
-\rightarrow
-Understand\ the\ World
-\rightarrow
-Act\ in\ the\ World
-\rightarrow
-Change\ the\ World
-\rightarrow
-Create\ Worlds
-}
-]
+Know the World
+→
+Understand the World
+→
+Act in the World
+→
+Change the World
+→
+Create Worlds
 
 ---
 
@@ -1820,18 +1536,14 @@ Create\ Worlds
 
 最终：
 
-[
-\boxed{
 Harness
 =======
 
-AI\rightarrow World
-\quad
+AI→ World
+quad
 +
-\quad
-World\rightarrow AI
-}
-]
+quad
+World→ AI
 
 它不再是一个外围框架。
 
@@ -1909,21 +1621,17 @@ World\rightarrow AI
 
 那么整个系统就会形成：
 
-[
-\boxed{
 AI
-\rightarrow
+→
 World
-\rightarrow
+→
 Experience
-\rightarrow
-World\ Model
-\rightarrow
-New\ AI
-\rightarrow
-New\ World
-}
-]
+→
+World Model
+→
+New AI
+→
+New World
 
 这已经不再是普通的：
 
@@ -1947,29 +1655,25 @@ New\ World
 
 如果我们把 AI 的发展看成一条不断向上的阶梯：
 
-[
-\boxed{
 观察
-\rightarrow
+→
 预测
-\rightarrow
+→
 干预
-\rightarrow
+→
 反事实
-\rightarrow
+→
 发现因果
-\rightarrow
+→
 改变因果
-\rightarrow
+→
 组合因果
-\rightarrow
+→
 创造因果
-\rightarrow
+→
 创造世界
-\rightarrow
+→
 演化世界
-}
-]
 
 那么今天的 World Model，可能只是中间非常关键的一层。
 
@@ -2027,17 +1731,13 @@ Self-Evolution 告诉我们：
 
 而这或许才是：
 
-[
-\boxed{
-World\ Model
-\rightarrow
+World Model
+→
 Agent
-\rightarrow
-Causal\ Intelligence
-\rightarrow
-Super\ AI
-}
-]
+→
+Causal Intelligence
+→
+Super AI
 
 这条路线真正值得我们认真思考的地方。
 
