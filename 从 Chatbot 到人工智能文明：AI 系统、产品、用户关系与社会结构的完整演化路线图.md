@@ -3080,3 +3080,10 @@ Civilization
 而我们今天正在构建的每一个 Agent、每一个 Harness、每一个 Memory 系统、每一个自主运行的 AI，都可以被看作这条漫长路线上的一个非常早期的实验。
 
 **从 Chatbot 到 Agent，从 Agent 到人工主体，从人工主体到人工社会，再从人工社会到人工文明——这或许才是理解未来几十年 AI 演化最重要的一张地图。**
+
+[1]: https://www.oreilly.com/radar/the-ai-agents-stack-2026-edition/?utm_source=chatgpt.com "The AI Agents Stack (2026 Edition) – O’Reilly"
+[2]: https://www.wired.com/story/openai-is-developing-a-persistent-ai-agent?utm_source=chatgpt.com "OpenAI Is Developing a 'Persistent' AI Agent"
+[3]: https://zylos.ai/research/2026-05-28-ai-agent-memory-architecture-persistent-state-management/?utm_source=chatgpt.com "AI Agent Memory Architecture: Persistent State Management for Long-Running Agents | Zylos Research"
+[4]: https://miamiaigroup.com/research/agentic-ai-architecture-enterprise/?utm_source=chatgpt.com "Agentic AI Architecture: Designing Enterprise Systems for Autonomous Work - Miami AI Group"
+[5]: https://www.techradar.com/pro/govern-ai-agents-before-they-go-rogue?utm_source=chatgpt.com "Govern AI agents before they go rogue"
+[6]: https://www.wsj.com/cio-journal/introducing-the-ai-model-harness-a638c65b?utm_source=chatgpt.com "Introducing the AI Model 'Harness'"
